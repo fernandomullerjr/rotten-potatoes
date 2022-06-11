@@ -1,30 +1,38 @@
-FROM python:3.6.1-alpine
+FROM python:3.6.8-alpine3.9
 
 LABEL MAINTAINER="Fernando Muller <fernandomj90@gmail.com>"
 
 ENV GROUP_ID=1000 \
     USER_ID=1000
 
+WORKDIR /app
+ADD . /app
+
 RUN pip install --upgrade pip
 RUN pip install -U pip setuptools wheel
 RUN pip install markupsafe
 RUN pip install flask
-RUN pip install gunicorn
+
 RUN apk add --no-cache jpeg-dev zlib-dev
 RUN apk add --no-cache --virtual .build-deps build-base linux-headers \
     && pip install Pillow
-COPY ./src/app.py /app/app.py
-COPY ./src/requirements.txt /app/requirements.txt
-WORKDIR /app
+
+# RUN export PYTHONPATH="$PYTHONPATH:/app"
+
+COPY app.py /app/app.py
+
 RUN pip install --no-cache-dir -r /app/requirements.txt
-COPY ./src .
-#CMD ["python","app.py"]
+RUN pip install gunicorn
 
 RUN addgroup -g $GROUP_ID www
 RUN adduser -D -u $USER_ID -G www www -s /bin/sh
 
+# Change current user to www
 USER www
 
 EXPOSE 5000
 
-CMD [ "gunicorn", "-w", "4", "--bind", "0.0.0.0:5000", "app.wsgi_app"]
+#CMD ["python","app.py"]
+#CMD [ "gunicorn", "-w", "4", "--bind", "0.0.0.0:5000", "app.app:app"]
+#CMD [ "gunicorn", "-w", "4", "--bind", "0.0.0.0:5000", "wsgi"]
+CMD [ "gunicorn", "-w", "4", "--bind", "0.0.0.0:5000", "app:app"]

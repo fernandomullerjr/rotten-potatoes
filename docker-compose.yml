@@ -4,14 +4,15 @@ services:
   flask:
     build:
       #context: setup/python
-      context: ./ #project_folder for this case
-      dockerfile: ./setup/python/Dockerfile
+      context: app #project_folder for this case
+      dockerfile: Dockerfile
     container_name: flask
-    image: fernandomj90/flask-python:3.6.1
+    image: fernandomj90/flask-python:3.6.8
     restart: unless-stopped
+    tty: true
     environment:
       APP_ENV: "prod"
-      APP_DEBUG: "False"
+      APP_DEBUG: "True"
       APP_PORT: 5000
       MONGODB_DB: admin
       MONGODB_DATABASE: admin
@@ -37,6 +38,9 @@ services:
       MONGO_INITDB_ROOT_USERNAME: mongouser
       MONGO_INITDB_ROOT_PASSWORD: mongopwd
       MONGO_INITDB_DATABASE: admin
+      MONGODB_DATABASE: admin
+      MONGODB_USER: mongouser
+      MONGODB_PASS: mongopwd
       MONGODB_DATA_DIR: /data/db
       MONDODB_LOG_DIR: /dev/null
     ports:
@@ -50,11 +54,12 @@ services:
     build:
       #context: setup/nginx
       #dockerfile: Dockerfile
-      context: ./ #project_folder for this case
-      dockerfile: ./setup/nginx/Dockerfile
+      context: nginx #project_folder for this case
+      dockerfile: Dockerfile
     image: fernandomj90/nginx-alpine-desafio-docker:3.15.4
     container_name: webserver
     restart: unless-stopped
+    tty: true
     environment:
       APP_ENV: "prod"
       APP_NAME: "webserver"

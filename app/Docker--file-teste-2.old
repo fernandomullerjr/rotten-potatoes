@@ -1,0 +1,19 @@
+FROM python:3.6.12-alpine
+
+RUN apk add --no-cache jpeg-dev zlib-dev
+RUN apk add --no-cache --virtual .build-deps build-base linux-headers \
+    && pip install Pillow
+
+RUN pip install --upgrade pip
+RUN pip install -U pip setuptools wheel
+RUN pip install markupsafe
+RUN pip install flask
+RUN pip install gunicorn
+
+COPY requirements.txt /
+RUN pip3 install -r /requirements.txt
+
+COPY . /app
+WORKDIR /app
+
+ENTRYPOINT ["./gunicorn.sh"]

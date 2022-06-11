@@ -1,6 +1,6 @@
 from re import A
 from flask import Flask, render_template, request, url_for, redirect, Response, jsonify
-#from flask_pymongo import PyMongo
+from flask_pymongo import PyMongo
 import os 
 from flask_mongoengine import json
 from models.review import Review
@@ -99,5 +99,14 @@ def unhealth():
 def ready():
     return Response('OK')
 
+
+# 
 if __name__ == '__main__':
     app.run()
+
+
+# Nova configuração - teste
+#if __name__ == "__main__":
+#    ENVIRONMENT_DEBUG = os.environ.get("APP_DEBUG", True)
+#    ENVIRONMENT_PORT = os.environ.get("APP_PORT", 5000)
+#    app.run(host='0.0.0.0', port=ENVIRONMENT_PORT, debug=ENVIRONMENT_DEBUG)
