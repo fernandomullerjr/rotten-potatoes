@@ -13,7 +13,7 @@ MONGODB_USERNAME = os.getenv("MONGODB_USERNAME", "mongouser")
 MONGODB_PASSWORD = os.getenv("MONGODB_PASSWORD", "mongopwd") 
 
 def on_starting(server):    
-
+#
     CONNECTION_STRING = "mongodb://" + MONGODB_USERNAME + ":" + MONGODB_PASSWORD + "@" + MONGODB_HOST 
 
     client = MongoClient(CONNECTION_STRING)
