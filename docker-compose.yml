@@ -7,12 +7,10 @@ services:
       context: app #project_folder for this case
       dockerfile: Dockerfile
     container_name: flask
-    image: fernandomj90/flask-python:3.6.8
-    restart: unless-stopped
-    tty: true
+    image: fernandomj90/app-rotten-potatoes:v1
+    ports:
+      - 5000:5000
     environment:
-      APP_ENV: "prod"
-      APP_DEBUG: "True"
       APP_PORT: 5000
       MONGODB_DB: admin
       MONGODB_DATABASE: admin
@@ -21,8 +19,8 @@ services:
       MONGODB_HOSTNAME: mongodb
       MONGODB_HOST: mongodb
       MONGODB_PORT: 27017
-    volumes:
-      - appdata:/app
+#    volumes:
+#      - appvolume:/app
     depends_on:
       - mongodb
     networks:
@@ -83,8 +81,5 @@ networks:
 
 volumes:
   mongodbdata:
-    driver: local
-  appdata:
-    driver: local
+#  appvolume:
   nginxdata:
-    driver: local
