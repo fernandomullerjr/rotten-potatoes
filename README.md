@@ -273,5 +273,6 @@ volumes:
 ~~~~
 
 - Sites que ajudaram a chegar nesta solução:
-<https://forums.docker.com/t/dockerfile-copy-command-not-copying-files/81520/4>
-<https://stackoverflow.com/questions/72277348/docker-is-not-copying-file-on-a-shared-volume-during-build>
+
+1. <https://forums.docker.com/t/dockerfile-copy-command-not-copying-files/81520/4>
+2. <https://stackoverflow.com/questions/72277348/docker-is-not-copying-file-on-a-shared-volume-during-build>
