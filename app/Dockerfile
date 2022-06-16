@@ -1,5 +1,7 @@
 FROM python:3.10.1-slim
 
+LABEL MAINTAINER="Fernando Müller <fernandomj90@gmail.com>"
+
 RUN pip install --upgrade pip
 
 WORKDIR /app
@@ -16,4 +18,3 @@ ENV FLASK_APP=./app.py
 ENV FLASK_ENV=development
 
 CMD ["gunicorn", "-c", "config.py", "--bind", "0.0.0.0:5000", "app:app"]
-#CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]

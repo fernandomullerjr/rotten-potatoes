@@ -1,6 +1,6 @@
 FROM alpine:3.15.4
 
-LABEL MAINTAINER="Fernando Muller <fernandomj90@gmail.com>"
+LABEL MAINTAINER="Fernando Müller <fernandomj90@gmail.com>"
 
 RUN apk --update add nginx && \
     ln -sf /dev/stdout /var/log/nginx/access.log && \

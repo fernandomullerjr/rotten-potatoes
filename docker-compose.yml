@@ -3,8 +3,7 @@ services:
 
   flask:
     build:
-      #context: setup/python
-      context: app #project_folder for this case
+      context: app
       dockerfile: Dockerfile
     container_name: flask
     image: fernandomj90/app-rotten-potatoes:v1
@@ -50,9 +49,7 @@ services:
 
   webserver:
     build:
-      #context: setup/nginx
-      #dockerfile: Dockerfile
-      context: nginx #project_folder for this case
+      context: nginx
       dockerfile: Dockerfile
     image: fernandomj90/nginx-alpine-desafio-docker:3.15.4
     container_name: webserver
