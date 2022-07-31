@@ -215,6 +215,7 @@ Durante a criação do projeto, ocorreram problemas para executar a aplicação 
 - Erro no Container do Flask, utilizando NGINX, Gunicorn e Flask.
 - Erro ocorre na subida do Gunicorn.
 - É como se o COPY do Dockerfile não tivesse efeito, não existisse o módulo dentro do container, consequentemente não conseguia efetuar o start no serviço do GUNICORN conforme o esperado.
+- O problema ocorria devido o volume que era criado pelo Docker-compose acaba sobrescrevendo a pasta /app do projeto no Container, fazendo com que o COPY que eu fazia durante o build fosse inutilizado, então o Gunicorn não encontrava mais os módulos que ele precisa.
 
 - Erro:
 ModuleNotFoundError: No module named 'app'
